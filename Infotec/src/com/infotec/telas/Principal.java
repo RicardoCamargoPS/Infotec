@@ -38,6 +38,7 @@ public class Principal extends JFrame {
 	private JMenuItem miOp_Exit;
 	public static JLabel lblLoginUsuario;
 	private JLabel lblData;
+	private JDesktopPane desktopPane;
 	
 	/**
 	 * Create the frame.
@@ -61,6 +62,14 @@ public class Principal extends JFrame {
 		mnCadastro.add(miCad_Os);
 		
 		miCad_Usuario = new JMenuItem("Usuarios");
+		miCad_Usuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Usuarios usuario = new Usuarios();
+				usuario.setVisible(true);
+				desktopPane.add(usuario);
+				
+			}
+		});
 		miCad_Usuario.setEnabled(false);
 		mnCadastro.add(miCad_Usuario);
 		
@@ -103,7 +112,7 @@ public class Principal extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane = new JDesktopPane();
 		
 		JPanel panel = new JPanel();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
