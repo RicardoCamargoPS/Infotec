@@ -31,7 +31,7 @@ public class Usuarios extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtFone;
 	private JTextField txtLogin;
-	private JComboBox cboPerfil;
+	private JComboBox<String> cboPerfil = new JComboBox<>(new DefaultComboBoxModel<String>(new String[] {"super", "admin", "user"}));
 	private JButton btnNovo, btnEditar, btnExcluir, btnPesquisar, btnSalvar;
 	private JTextField txtSenha;
 
@@ -43,7 +43,7 @@ public class Usuarios extends JInternalFrame {
 	public Usuarios() {
 
 		conexao = ConexaoDB.conector();		
-		
+
 		initComponent();
 
 	}
@@ -77,10 +77,6 @@ public class Usuarios extends JInternalFrame {
 		txtLogin.setColumns(10);
 
 		JLabel lblNewLabel_5 = new JLabel("Perfil:");
-
-		cboPerfil = new JComboBox();
-		cboPerfil.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User", ""}));
-
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.GRAY);
 
@@ -122,6 +118,7 @@ public class Usuarios extends JInternalFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGap(28))
 				);
+		cboPerfil.setSelectedIndex(-1);
 		groupLayout.setVerticalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -156,7 +153,7 @@ public class Usuarios extends JInternalFrame {
 		btnPesquisar = new JButton("");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				consultar();
 			}
 		});
@@ -226,32 +223,38 @@ public class Usuarios extends JInternalFrame {
 		getContentPane().setLayout(groupLayout);	
 
 	}
-	
+
 	private void consultar() {
 		String sql = "select * from tbusuarios where id =?";		
 		try {
-			
+
 			pst = conexao.prepareStatement(sql);
 			pst.setString(1, txtID.getText());
-			
+
 			rs = pst.executeQuery();
-			
+
 			if (rs.next()) {
-				
+
 				txtNome.setText(rs.getString(2));
 				txtFone.setText(rs.getString(3));
 				txtLogin.setText(rs.getString(4));
 				txtSenha.setText(rs.getString(5));
-				cboPerfil.setSelectedItem(rs.getObject(6));
-				
-				
-			} else {
+				cboPerfil.setSelectedItem(rs.getObject(6));			
+
+			} else {				
+				JOptionPane.showMessageDialog(null, "Usuario não cadastrado");
+				txtNome.setText(null);
+				txtFone.setText(null);
+				txtLogin.setText(null);
+				txtSenha.setText(null);
+				cboPerfil.setSelectedItem(null);	
 
 			}
-			
-		}
-		catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		}
+
 	}
+	catch (Exception e) {
+		JOptionPane.showMessageDialog(null, e);
+	}
+
+}
 }
