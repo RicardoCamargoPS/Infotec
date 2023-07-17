@@ -193,6 +193,11 @@ public class Usuarios extends JInternalFrame {
 		btnEditar.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/editar.png")));
 
 		btnExcluir = new JButton("");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				remover();
+			}
+		});
 		btnExcluir.setToolTipText("Deletar");
 		btnExcluir.setPreferredSize(new Dimension(80, 80));
 		btnExcluir.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/excluir.png")));
@@ -367,5 +372,33 @@ public class Usuarios extends JInternalFrame {
 		}
 	}
 
+
+	private void remover(){
+
+		int confirma = JOptionPane.showConfirmDialog(null, "Realmente deseja remover o usuario", "Atenção",JOptionPane.YES_NO_OPTION);
+		if(confirma == JOptionPane.YES_OPTION) {
+			String sql = "delete from tbusuarios where id =?";
+			try {
+				pst = conexao.prepareStatement(sql);
+				pst.setString(1, txtID.getText());
+				
+				int apagado = pst.executeUpdate();
+				
+				if(apagado > 0) {
+					JOptionPane.showInternalMessageDialog(null, "Usuario removido com sucesso");
+					txtID.setText(null);
+					txtNome.setText(null);
+					txtFone.setText(null);
+					txtLogin.setText(null);
+					txtSenha.setText(null);
+					cboPerfil.setSelectedItem(2);
+				}
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			}
+		}
+
+	}
 }
 
