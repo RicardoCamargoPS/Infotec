@@ -35,7 +35,7 @@ public class Usuarios extends JInternalFrame {
 	private JTextField txtLogin;
 	private JComboBox<String> cboPerfil = new JComboBox<>(
 			new DefaultComboBoxModel<String>(new String[] { "super", "admin", "user" }));
-	private JButton btnNovo, btnEditar, btnExcluir, btnPesquisar, btnSalvar;
+	private JButton btnNovo, btnEditar, btnExcluir, btnPesquisar;
 	private JTextField txtSenha;
 
 	private JLabel lblID, lblNome, lblTel, lblLogin, lblSenha, lblPerfil, lblMessagem;
@@ -91,75 +91,73 @@ public class Usuarios extends JInternalFrame {
 		lblMessagem = new JLabel("");
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblTel)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtFone, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblPerfil)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(cboPerfil, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addComponent(lblTel)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(txtFone, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblLogin)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtLogin, 171, 171, 171)))
-							.addGap(18)
-							.addComponent(lblSenha)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtSenha))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblID)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtID, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblMessagem, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(lblPerfil)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(cboPerfil, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(lblLogin)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(txtLogin, 171, 171, 171)))
+										.addGap(18)
+										.addComponent(lblSenha)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(txtSenha))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNome)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 363, GroupLayout.PREFERRED_SIZE)))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(28, Short.MAX_VALUE))
-		);
+										.addComponent(lblID)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(txtID, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblMessagem, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(lblNome)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 363, GroupLayout.PREFERRED_SIZE)))))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(22, Short.MAX_VALUE))
+				);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblMessagem, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblID)
-								.addComponent(txtID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNome)
-								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(55)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTel)
-								.addComponent(txtFone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(60)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblLogin)
-								.addComponent(lblSenha)
-								.addComponent(txtLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(70)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblPerfil)
-								.addComponent(cboPerfil, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(32)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(22, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addComponent(lblMessagem, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(panel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblID)
+												.addComponent(txtID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblNome)
+												.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addGap(55)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblTel)
+												.addComponent(txtFone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addGap(60)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblLogin)
+												.addComponent(lblSenha)
+												.addComponent(txtLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(txtSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addGap(70)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblPerfil)
+												.addComponent(cboPerfil, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap(52, Short.MAX_VALUE))
+				);
 		cboPerfil.setSelectedIndex(2);
 
 		btnPesquisar = new JButton("");
@@ -170,7 +168,7 @@ public class Usuarios extends JInternalFrame {
 			}
 		});
 		btnPesquisar.setToolTipText("Pesquisar");
-		btnPesquisar.setPreferredSize(new Dimension(70, 70));
+		btnPesquisar.setPreferredSize(new Dimension(80, 80));
 		btnPesquisar.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/pesquisar.png")));
 
 		btnNovo = new JButton("");
@@ -181,54 +179,56 @@ public class Usuarios extends JInternalFrame {
 			}
 		});
 		btnNovo.setToolTipText("Novo");
-		btnNovo.setPreferredSize(new Dimension(70, 70));
+		btnNovo.setPreferredSize(new Dimension(80, 80));
 		btnNovo.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/novo.png")));
 
 		btnEditar = new JButton("");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alterar();
+			}
+		});
 		btnEditar.setToolTipText("Editar");
-		btnEditar.setPreferredSize(new Dimension(70, 70));
+		btnEditar.setPreferredSize(new Dimension(80, 80));
 		btnEditar.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/editar.png")));
 
 		btnExcluir = new JButton("");
 		btnExcluir.setToolTipText("Deletar");
-		btnExcluir.setPreferredSize(new Dimension(70, 70));
+		btnExcluir.setPreferredSize(new Dimension(80, 80));
 		btnExcluir.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/excluir.png")));
-
-		btnSalvar = new JButton("");
-		btnSalvar.setToolTipText("Salvar");
-		btnSalvar.setPreferredSize(new Dimension(70, 70));
-		btnSalvar.setIcon(new ImageIcon(Usuarios.class.getResource("/com/infotec/icons/48753_diskette_icon.png")));
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		gl_panel.setHorizontalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
 						.addComponent(btnPesquisar, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				.addGroup(Alignment.LEADING,
-						gl_panel.createSequentialGroup().addContainerGap()
-						.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING,
-						gl_panel.createSequentialGroup().addContainerGap()
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
 						.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING,
-						gl_panel.createSequentialGroup().addContainerGap()
-						.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGap(7)
+				);
+		gl_panel.setVerticalGroup(
+				gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap()
 						.addComponent(btnPesquisar, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE).addGap(11)
-						.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+						.addGap(11)
+						.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
 		panel.setLayout(gl_panel);
 		getContentPane().setLayout(groupLayout);
 
@@ -289,10 +289,10 @@ public class Usuarios extends JInternalFrame {
 				lblNome.setForeground(Color.red);
 				lblLogin.setForeground(Color.red);
 				lblSenha.setForeground(Color.red);
-				
+
 				lblMessagem.setText("Os campos em vermelho devem ser preenchidos");
 			} else {
-				
+
 				lblID.setForeground(Color.black);
 				lblNome.setForeground(Color.black);
 				lblLogin.setForeground(Color.black);
@@ -314,6 +314,55 @@ public class Usuarios extends JInternalFrame {
 
 		}
 		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+	private void alterar() {
+		String sql ="update tbusuarios set usuario = ?, fone = ?, login =?, senha = ?, perfil = ? where id = ?";
+
+		try {
+			pst = conexao.prepareStatement(sql);
+
+			pst.setString(1, txtNome.getText());
+			pst.setString(2, txtFone.getText());
+			pst.setString(3, txtLogin.getText());
+			pst.setString(4, txtSenha.getText());
+			pst.setString(5, cboPerfil.getSelectedItem().toString());
+			pst.setString(6, txtID.getText());
+
+			if ((txtID.getText().isEmpty())
+					|| (txtNome.getText().isEmpty())
+					|| (txtLogin.getText().isEmpty())
+					|| (txtSenha.getText().isEmpty())
+					) {
+				lblID.setForeground(Color.red);
+				lblNome.setForeground(Color.red);
+				lblLogin.setForeground(Color.red);
+				lblSenha.setForeground(Color.red);
+
+				lblMessagem.setText("Os campos em vermelho devem ser preenchidos");
+			} else {
+
+				lblID.setForeground(Color.black);
+				lblNome.setForeground(Color.black);
+				lblLogin.setForeground(Color.black);
+				lblSenha.setForeground(Color.black);
+
+				int adicionado = pst.executeUpdate();
+
+				if (adicionado > 0) {
+					JOptionPane.showMessageDialog(null, "Dados de usuario alterado com sucesso");
+					pst.setString(1, txtID.getText());
+					pst.setString(2, txtNome.getText());
+					pst.setString(3, txtFone.getText());
+					pst.setString(4, txtLogin.getText());
+					pst.setString(5, txtSenha.getText());
+					pst.setString(6, cboPerfil.getSelectedItem().toString());
+
+				} 
+			}
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
