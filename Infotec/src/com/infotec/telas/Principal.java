@@ -56,6 +56,13 @@ public class Principal extends JFrame {
 		menuBar.add(mnCadastro);
 		
 		miCad_Clientes = new JMenuItem("Clientes");
+		miCad_Clientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clientes cliente = new Clientes();
+				cliente.setVisible(true);
+				desktopPane.add(cliente);
+			}
+		});
 		mnCadastro.add(miCad_Clientes);
 		
 		miCad_Os = new JMenuItem("OS");
