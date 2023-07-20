@@ -16,8 +16,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.sql.*;
 import com.infotec.db.ConexaoDB;
+import net.proteanit.sql.DbUtils;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Clientes extends JInternalFrame {
 	/**
@@ -31,7 +35,7 @@ public class Clientes extends JInternalFrame {
 	private JTextField txtCidade;
 	private JTextField txtUF;
 	private JTextField txtEmail;
-	private JTable tableClientes;
+	private JTable tbClientes;
 	private JTextField txtPesquisar;
 
 
@@ -72,6 +76,12 @@ public class Clientes extends JInternalFrame {
 		JPanel panel = new JPanel();
 
 		txtPesquisar = new JTextField();
+		txtPesquisar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				pesquisar();
+			}
+		});
 		txtPesquisar.setColumns(10);
 
 		JLabel lblNewLabel_8 = new JLabel("");
@@ -79,37 +89,8 @@ public class Clientes extends JInternalFrame {
 		JLabel lblPesquisar = new JLabel("");
 		lblPesquisar.setIcon(new ImageIcon(Clientes.class.getResource("/com/infotec/icons/3924902_search_searching_web_creanimasi_icon.png")));
 
-		tableClientes = new JTable();
-		tableClientes.setSurrendersFocusOnKeystroke(true);
-		tableClientes.setFillsViewportHeight(true);
-		tableClientes.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null, null, null, "", ""},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-				},
-				new String[] {
-						"ID", "Nome", "Rua", "Numero", "Fone", "Email"
-				}
-				) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			Class[] columnTypes = new Class[] {
-					Integer.class, String.class, String.class, Integer.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		tbClientes = new JTable();
+			
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
@@ -130,7 +111,7 @@ public class Clientes extends JInternalFrame {
 												.addContainerGap(88, Short.MAX_VALUE))
 										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 												.addGap(7)
-												.addComponent(tableClientes, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(tbClientes, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addContainerGap()))))
 				);
 		groupLayout.setVerticalGroup(
@@ -143,7 +124,7 @@ public class Clientes extends JInternalFrame {
 						.addGap(18)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblNewLabel_8)
-								.addComponent(tableClientes, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+								.addComponent(tbClientes, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
 						.addGap(13)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGap(371))
@@ -392,5 +373,25 @@ public class Clientes extends JInternalFrame {
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
+	}
+	
+	private void pesquisar() {
+		String sql = "select * from tbclientes where nome like ?";
+		
+		try {
+			
+			pst = conexao.prepareStatement(sql);
+			
+			pst.setString(1, txtPesquisar.getText() + "%");
+			rs = pst.executeQuery();
+			
+			tbClientes.setModel(DbUtils.resultSetToTableModel(rs));
+			
+			
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
 	}
 }
