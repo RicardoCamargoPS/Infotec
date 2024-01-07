@@ -11,17 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
 import java.sql.*;
 import com.infotec.db.ConexaoDB;
-import net.proteanit.sql.DbUtils;
+import net.proteanit.sql.DbUtils;  
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Clientes extends JInternalFrame {
 	/**
@@ -47,29 +48,16 @@ public class Clientes extends JInternalFrame {
 	private JLabel lblFone;
 	private JLabel lblNome;
 
-	/**
-	 * Launch the application.
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Clientes frame = new Clientes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Clientes() {
 
 		conexao = ConexaoDB.conector();
+		
 
+		setTitle("Cadastro de Clientes");
+		setResizable(true);
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
 
 		setBounds(100, 100, 623, 562);
 
@@ -90,6 +78,34 @@ public class Clientes extends JInternalFrame {
 		lblPesquisar.setIcon(new ImageIcon(Clientes.class.getResource("/com/infotec/icons/3924902_search_searching_web_creanimasi_icon.png")));
 
 		tbClientes = new JTable();
+		tbClientes.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setCampos();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				
+			}
+			
+		});
 			
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -298,6 +314,12 @@ public class Clientes extends JInternalFrame {
 		btnNovo.setIcon(new ImageIcon(Clientes.class.getResource("/com/infotec/icons/novo.png")));
 
 		JButton btnEditar = new JButton("");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				alterar();
+			}
+		});
 		btnEditar.setIcon(new ImageIcon(Clientes.class.getResource("/com/infotec/icons/editar.png")));
 
 		JButton btnExcluir = new JButton("");
@@ -334,8 +356,6 @@ public class Clientes extends JInternalFrame {
 
 		String sql = "insert into tbclientes(nome, fone, cep, cidade, estado, rua, nun_residencia, enail) values(?, ?, ?, ?, ?, ?, ?, ?)";		
 		try {
-
-
 			pst = conexao.prepareStatement(sql);
 			pst.setString(1, txtNome.getText());
 			pst.setString(2, txtFone.getText());
@@ -386,12 +406,67 @@ public class Clientes extends JInternalFrame {
 			rs = pst.executeQuery();
 			
 			tbClientes.setModel(DbUtils.resultSetToTableModel(rs));
-			
-			
-			
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
 		
+	}
+
+	public void setCampos(){
+
+		int setar = tbClientes.getSelectedRow();
+
+		txtNome.setText(tbClientes.getModel().getValueAt(setar, 1).toString());
+		txtRua.setText(tbClientes.getModel().getValueAt(setar, 6).toString());
+		txtNumCasa.setText(tbClientes.getModel().getValueAt(setar, 7).toString());
+		txtCEP.setText(tbClientes.getModel().getValueAt(setar, 3).toString());
+		txtCidade.setText(tbClientes.getModel().getValueAt(setar, 4).toString());
+		txtUF.setText(tbClientes.getModel().getValueAt(setar, 5).toString());
+		txtEmail.setText(tbClientes.getModel().getValueAt(setar, 8).toString());
+		txtFone.setText(tbClientes.getModel().getValueAt(setar, 2).toString());
+
+	}
+
+	private void alterar() {
+		String sql = "update tbclientes set nome = ?, fone = ?, cep =?, cidade = ?, estado = ?, rua = ?, nun_residencia = ?, enail =? where nome = ?";
+
+		try {
+			pst = conexao.prepareStatement(sql);
+
+			pst.setString(1, txtNome.getText());
+			pst.setString(2, txtFone.getText());
+			pst.setString(3, txtCEP.getText());
+			pst.setString(4, txtCidade.getText());
+			pst.setString(5, txtUF.getText());
+			pst.setString(6, txtRua.getText());
+			pst.setString(7, txtNumCasa.getText());
+			pst.setString(8, txtEmail.getText());
+			pst.setString(9, txtNome.getText());
+
+			if ((txtNome.getText().isEmpty())	|| (txtFone.getText().isEmpty())) {
+				
+				JOptionPane.showMessageDialog(null, "Preencha os dados obricatorios");
+
+			} else {
+
+				int adicionado = pst.executeUpdate();
+
+				if (adicionado > 0) {
+					JOptionPane.showMessageDialog(null, "Dados do cliente alterado com sucesso");
+					txtNome.setText("");
+					txtRua.setText("");
+					txtNumCasa.setText("");
+					txtCEP.setText("");
+					txtCidade.setText("");
+					txtUF.setText("");
+					txtEmail.setText("");
+					txtFone.setText("");
+
+				} 
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
 	}
 }

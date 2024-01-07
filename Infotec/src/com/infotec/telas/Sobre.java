@@ -36,7 +36,7 @@ public class Sobre extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("Desenvolvido por: ");
 		
-		JLabel lblNewLabel_4 = new JLabel("Ricard ode Camargo Prado da Silva");
+		JLabel lblNewLabel_4 = new JLabel("Ricardo de Camargo Prado da Silva");
 		
 		JLabel lblNewLabel_5 = new JLabel("Santa Barbara do Oeste - SP Brasil");
 		

@@ -13,9 +13,9 @@ public class ConexaoDB {
         
         String driver = "com.mysql.cj.jdbc.Driver";
         
-        String url = "jdbc:mysql://localhost:3306/db_assiinfo";
+        String url = "jdbc:mysql://localhost:3306/dbinfotec";
         String user = "root";
-        String password = "admin";
+        String password = "vnqu2412";
         
         try {
             Class.forName(driver);
