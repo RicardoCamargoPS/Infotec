@@ -38,6 +38,8 @@ public class Clientes extends JInternalFrame {
 	private JTextField txtEmail;
 	private JTable tbClientes;
 	private JTextField txtPesquisar;
+	private String id;
+	private JButton btnNovo;
 
 
 	Connection conexao = null;
@@ -304,7 +306,7 @@ public class Clientes extends JInternalFrame {
 		);
 		panel_2.setLayout(gl_panel_2);
 
-		JButton btnNovo = new JButton("");
+		btnNovo = new JButton("");
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -323,6 +325,13 @@ public class Clientes extends JInternalFrame {
 		btnEditar.setIcon(new ImageIcon(Clientes.class.getResource("/com/infotec/icons/editar.png")));
 
 		JButton btnExcluir = new JButton("");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				remover();
+			}
+		});
+
 		btnExcluir.setIcon(new ImageIcon(Clientes.class.getResource("/com/infotec/icons/excluir.png")));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -416,7 +425,8 @@ public class Clientes extends JInternalFrame {
 	public void setCampos(){
 
 		int setar = tbClientes.getSelectedRow();
-
+		
+		id = tbClientes.getModel().getValueAt(setar, 0).toString();
 		txtNome.setText(tbClientes.getModel().getValueAt(setar, 1).toString());
 		txtRua.setText(tbClientes.getModel().getValueAt(setar, 6).toString());
 		txtNumCasa.setText(tbClientes.getModel().getValueAt(setar, 7).toString());
@@ -426,10 +436,44 @@ public class Clientes extends JInternalFrame {
 		txtEmail.setText(tbClientes.getModel().getValueAt(setar, 8).toString());
 		txtFone.setText(tbClientes.getModel().getValueAt(setar, 2).toString());
 
+		btnNovo.setEnabled(false);
+
 	}
 
+	private void remover(){
+
+		int confirma = JOptionPane.showConfirmDialog(null, "Realmente deseja remover o cliente", "Atenção",JOptionPane.YES_NO_OPTION);
+		if(confirma == JOptionPane.YES_OPTION) {
+			String sql = "delete from tbclientes where id =?";
+			try {
+				pst = conexao.prepareStatement(sql);
+				pst.setString(1, id);
+				
+				int apagado = pst.executeUpdate();
+				
+				if(apagado > 0) {
+					JOptionPane.showInternalMessageDialog(null, "Cliente removido com sucesso ");
+					txtNome.setText("");
+					txtRua.setText("");
+					txtNumCasa.setText("");
+					txtCEP.setText("");
+					txtCidade.setText("");
+					txtUF.setText("");
+					txtEmail.setText("");
+					txtFone.setText("");
+
+					btnNovo.setEnabled(true);
+				}
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			};
+		}
+	}
+
+
 	private void alterar() {
-		String sql = "update tbclientes set nome = ?, fone = ?, cep =?, cidade = ?, estado = ?, rua = ?, nun_residencia = ?, enail =? where nome = ?";
+		String sql = "update tbclientes set nome = ?, fone = ?, cep =?, cidade = ?, estado = ?, rua = ?, nun_residencia = ?, enail =? where id = ?";
 
 		try {
 			pst = conexao.prepareStatement(sql);
@@ -442,7 +486,7 @@ public class Clientes extends JInternalFrame {
 			pst.setString(6, txtRua.getText());
 			pst.setString(7, txtNumCasa.getText());
 			pst.setString(8, txtEmail.getText());
-			pst.setString(9, txtNome.getText());
+			pst.setString(9, id);
 
 			if ((txtNome.getText().isEmpty())	|| (txtFone.getText().isEmpty())) {
 				
@@ -462,6 +506,8 @@ public class Clientes extends JInternalFrame {
 					txtUF.setText("");
 					txtEmail.setText("");
 					txtFone.setText("");
+
+					btnNovo.setEnabled(true);
 
 				} 
 			}
