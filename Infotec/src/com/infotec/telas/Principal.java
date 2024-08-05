@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.WindowEvent; 
 import java.text.DateFormat;
 import java.util.Date;
 import java.awt.event.ActionListener;
@@ -58,7 +58,7 @@ public class Principal extends JFrame {
 		miCad_Clientes = new JMenuItem("Clientes");
 		miCad_Clientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Clientes cliente = new Clientes();
+				CadClientes cliente = new CadClientes();
 				cliente.setVisible(true);
 				desktopPane.add(cliente);
 			}
