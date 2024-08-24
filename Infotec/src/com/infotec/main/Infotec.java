@@ -11,7 +11,6 @@ public class Infotec {
 		
 		login = new Infotec_login();
 		
-
 	}
 
 }

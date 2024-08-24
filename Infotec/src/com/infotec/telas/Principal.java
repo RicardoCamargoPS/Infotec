@@ -58,7 +58,7 @@ public class Principal extends JFrame {
 		miCad_Clientes = new JMenuItem("Clientes");
 		miCad_Clientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CadClientes cliente = new CadClientes();
+				Clientes cliente = new Clientes();
 				cliente.setVisible(true);
 				desktopPane.add(cliente);
 			}

@@ -48,19 +48,20 @@ public class Infotec_login extends JFrame {
 
 			if(rs.next()){
 				
-				String perfil = rs.getString(6);
+				String perfil = rs.getString(4);
 				
 				Principal principal = new Principal();    
 				principal.setLocationRelativeTo(null);
-				principal.setVisible(true);
-				if(perfil.equals("super") || perfil.equals("admin") ) {
+				
+				if(perfil.equals("admin")) {
 					Principal.miCad_Usuario.setEnabled(true);
 					Principal.mnRelatorio.setEnabled(true);
-					Principal.lblLoginUsuario.setForeground(Color.red);
+					Principal.lblLoginUsuario.setForeground(Color.blue);
 				}
 				Principal.lblLoginUsuario.setText(rs.getString(2));
 				this.dispose();
 				conexao.close();
+				principal.setVisible(true);
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "Usuario e/ou senha invalido");

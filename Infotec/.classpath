@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="D:/Projetos java/Infotec/Infotec/resurces/mysql-connector-j-8.0.33.jar"/>
-	<classpathentry kind="lib" path="D:/Projetos java/Infotec/Infotec/resurces/rs2xml.jar"/>
+	<classpathentry exported="true" kind="lib" path="resurces/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="resurces/rs2xml.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
